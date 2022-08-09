@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { getApiResource } from '../../utils/network'
 import { API_PEOPLE } from '../../constans/api'
-import { getPeopleId } from '../../services/getPeopleData';
+import { getPeopleId, getPeopleImage } from '../../services/getPeopleData';
+
 
 import styles from "./PeoplePage.module.css";
 
@@ -14,6 +15,9 @@ const PeoplePage = () => {
     const peopleList = res.results.map(({ name, url }) => {
       const id = getPeopleId(url);
       console.log(id);
+      const img = getPeopleImage(id);
+      console.log(img);
+
       return {
         name,
         url

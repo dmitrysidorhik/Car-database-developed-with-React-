@@ -1,23 +1,26 @@
 import { useState, useEffect } from 'react';
 import { getApiResource } from '../../utils/network'
 import { API_PEOPLE } from '../../constans/api'
+import { getPeopleId } from '../../services/getPeopleData';
 
 import styles from "./PeoplePage.module.css";
 
 const PeoplePage = () => {
 
-  const [people, setPiople] = useState(null);
-
+  const [people, setPeople] = useState(null);
 
   const getResource = async (url) => {
     const res = await getApiResource(url);
     const peopleList = res.results.map(({ name, url }) => {
+      const id = getPeopleId(url);
+      console.log(id);
       return {
         name,
         url
       }
     })
-    setPiople(peopleList);
+    console.log(peopleList);
+    setPeople(peopleList);
   }
   useEffect(() => {
     getResource(API_PEOPLE);

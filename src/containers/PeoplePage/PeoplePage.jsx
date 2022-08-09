@@ -14,16 +14,14 @@ const PeoplePage = () => {
     const res = await getApiResource(url);
     const peopleList = res.results.map(({ name, url }) => {
       const id = getPeopleId(url);
-      console.log(id);
       const img = getPeopleImage(id);
-      console.log(img);
 
       return {
+        id,
         name,
-        url
+        img
       }
     })
-    console.log(peopleList);
     setPeople(peopleList);
   }
   useEffect(() => {
@@ -33,9 +31,10 @@ const PeoplePage = () => {
     <>
       {people && (
         <ul>
-          {people.map(({ name, url }) =>
-            <li key={name}>
-              {name}
+          {people.map(({ id, name, img }) =>
+            <li key={id}>
+              <img src={img} alt={name} />
+              <p>{name}</p>
             </li>
           )}
         </ul>

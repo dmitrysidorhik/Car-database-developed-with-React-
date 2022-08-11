@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { withErrorApi } from '@hoc-helpers/withErrorApi';
 import { getApiResource } from '@utils/network'
 import { API_PEOPLE } from '@constans/api'
@@ -12,7 +13,7 @@ const PeoplePage = ({ setErrorApi }) => {
   const [people, setPeople] = useState(null);
 
   const getResource = async (url) => {
-    const res = await getApiResource(1 + url);
+    const res = await getApiResource(url);
 
     if (res) {
       const peopleList = res.results.map(({ name, url }) => {
@@ -43,6 +44,10 @@ const PeoplePage = ({ setErrorApi }) => {
     </>
   );
 };
+
+PeoplePage.propTypes = {
+  setErrorApi: PropTypes.func
+}
 
 export default withErrorApi(PeoplePage);
 
